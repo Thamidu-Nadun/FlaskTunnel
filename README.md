@@ -6,8 +6,7 @@
 
 **FlaskTunnel** is your go-to solution for remote terminal access and file management, wrapped in a sleek web interface.
 
-![Demo Screenshot](path/to/screenshot.png)
-
+<img src="https://i.ibb.co/kGH2P6m/flask-tunnel-3.png" alt="flask-tunnel">
 ### Key Features
 - 🖥️ **Terminal Access:** Execute commands remotely.
 - 📁 **File Sharing:** Seamless file sharing capabilities.
@@ -21,3 +20,17 @@ Clone the repository and install dependencies:
 git clone https://github.com/yourusername/FlaskTunnel.git
 cd FlaskTunnel
 pip install -r requirements.txt
+```
+### Run the application
+```bash
+python3 flask-cli.py [Directory_Name]
+```
+<img src="https://i.ibb.co/Ph7LLYt/flask-tunnel-1.png" alt="flask-tunnel">
+
+### Click the IP Address:
+
+<img src="https://i.ibb.co/xjhTxF8/flask-tunnel-2.png" alt="flask-tunnel">
+
+### Enjoy
+
+<img src="https://i.ibb.co/kGH2P6m/flask-tunnel-3.png" alt="flask-tunnel">
