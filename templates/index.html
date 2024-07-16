@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Terminal</title>
+    <style>
+        body {
+            background-color: #272727;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 1.2em;
+        }
+        .container{
+            width: 100vw;
+            height: 100vh;
+        }
+        .fakeButtons {
+            height: 10px;
+            width: 10px;
+            border-radius: 50%;
+            border: 1px solid #000;
+            display: inline-block;
+            margin: 0 5px;
+        }
+        .fakeClose {
+            background-color: #ff3b47;
+            border-color: #9d252b;
+        }
+        .fakeMinimize {
+            background-color: #ffc100;
+            border-color: #9d802c;
+        }
+        .fakeZoom {
+            background-color: #00d742;
+            border-color: #049931;
+        }
+        .fakeMenu {
+            width: 600px;
+            height: 25px;
+            background-color: #bbb;
+            margin: 0 auto;
+            border-radius: 5px 5px 0 0;
+            display: flex;
+            align-items: center;
+        }
+        .fakeScreen {
+            background-color: #151515;
+            width: 550px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 0 0 5px 5px;
+            color: #fff;
+        }
+        #output {
+            white-space: pre-wrap; /* Preserve whitespace and line breaks */
+        }
+        input {
+            width: calc(100% - 20px);
+            padding: 5px;
+            margin-top: 10px;
+            background-color: #272727;
+            color: #fff;
+            border: 1px solid #ccc;
+        }
+        input::placeholder {
+            color: #aaa;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="fakeMenu">
+            <div class="fakeButtons fakeClose"></div>
+            <div class="fakeButtons fakeMinimize"></div>
+            <div class="fakeButtons fakeZoom"></div>
+        </div>
+        <div class="fakeScreen">
+            <div id="output"></div>
+            <input type="text" id="command" placeholder="Enter command" />
+            <button onclick="sendCommand()">Execute</button>
+        </div>
+        <div class="fakeScreen">
+            <p>Go to <span id="client-ip"></span>:8021/ to download file</p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('command').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                sendCommand();
+            }
+        });
+
+        function sendCommand() {
+            const command = document.getElementById('command').value;
+            if (command.trim() === 'cls' || command.trim() === 'clear') {
+                document.getElementById('output').innerHTML = '';  // Clear output area
+                document.getElementById('command').value = '';  // Clear input
+                return;
+            }
+
+            fetch('/execute', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ command })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const output = document.getElementById('output');
+                if (data.error) {
+                    output.innerHTML += `Error: ${data.error}\n`;
+                } else {
+                    output.innerHTML += data.output + '\n';  // Append output
+                }
+                document.getElementById('command').value = '';  // Clear input after execution
+            })
+            .catch(err => {
+                const output = document.getElementById('output');
+                output.innerHTML += `Fetch error: ${err}\n`;
+            });
+        }
+    </script>
+    <script>
+        const domain = window.location.hostname;
+        document.getElementById('client-ip').textContent = domain;
+    </script>
+</body>
+</html>
