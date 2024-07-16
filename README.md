@@ -6,7 +6,9 @@
 
 **FlaskTunnel** is your go-to solution for remote terminal access and file management, wrapped in a sleek web interface.
 
-<img src="https://i.ibb.co/kGH2P6m/flask-tunnel-3.png" alt="flask-tunnel">
+<img src="https://i.ibb.co/kGH2P6m/flask-tunnel-3.png" alt="flask-tunnel"><br>
+
+
 ### Key Features
 - 🖥️ **Terminal Access:** Execute commands remotely.
 - 📁 **File Sharing:** Seamless file sharing capabilities.
@@ -31,6 +33,14 @@ python3 flask-cli.py [Directory_Name]
 
 <img src="https://i.ibb.co/xjhTxF8/flask-tunnel-2.png" alt="flask-tunnel">
 
-### Enjoy
+### Run any query!
 
 <img src="https://i.ibb.co/kGH2P6m/flask-tunnel-3.png" alt="flask-tunnel">
+
+### Download available files
+
+**Go to ```[IP_ADDRESS]:8021/file_name```**
+##### Example
+```bash
+https://127.0.0.1:8021/robot.txt
+```
