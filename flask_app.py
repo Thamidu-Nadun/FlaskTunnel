@@ -5,7 +5,7 @@ import argparse
 
 app = Flask(__name__)
 
-# Set up argument parsing
+# Set up arguments
 parser = argparse.ArgumentParser(description='A powerful tool for make a tunnel to your computer. Run the application to go crazy.')
 parser.add_argument('directory', type=str, help='Directory to host the Flask app.')
 parser.add_argument('-v', '--version', action='version', version='1.0', help='Show version information')
@@ -26,7 +26,6 @@ def execute():
         return jsonify({'output': '', 'error': 'No command provided.'})
 
     if command.startswith('cd '):
-        # Handle cd command by changing the current working directory
         dir_name = command.split(' ', 1)[1]
         try:
             os.chdir(os.path.join(BASE_DIR, dir_name))
@@ -45,4 +44,4 @@ def execute():
     return jsonify(result)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=8000, debug=False)

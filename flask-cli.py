@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 import os
 import argparse
-from flask_app import app  # Import your Flask app
+import subprocess
+from flask_app import app
+import threading
 
-# Function to display a banner
 def print_banner():
     banner = """
 ███╗   ██╗ █████╗ ██████╗ ███████╗ ██████╗ ███████╗████████╗
@@ -27,6 +28,10 @@ args = parser.parse_args()
 
 BASE_DIR = os.path.abspath(args.directory)
 
+def run_http_server():
+    subprocess.run(['python', '-m','http.server',' 8021'])
+    
 if __name__ == '__main__':
-    print_banner()  # Display the banner
-    app.run(host='0.0.0.0', port=5000, debug=True, use_reloader=False)
+    print_banner()
+    threading.Thread(target=run_http_server, daemon=True).start()
+    app.run(host='0.0.0.0', port=8000, debug=True, use_reloader=False)
