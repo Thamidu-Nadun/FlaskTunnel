@@ -39,7 +39,7 @@ python3 flask-cli.py [Directory_Name]
 
 ### Download available files
 
-**Go to ```[IP_ADDRESS]:8021/file_name```**
+**Go to ```0.0.0.0:8021/file_name```**
 ##### Example
 ```bash
 https://127.0.0.1:8021/robot.txt
